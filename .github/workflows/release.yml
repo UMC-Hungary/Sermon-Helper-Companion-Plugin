@@ -24,10 +24,16 @@ jobs:
 
       - run: npm run build
 
+      - name: Verify build output
+        run: test -f dist/main.js
+
+      - name: Install production dependencies for packaging
+        run: npm ci --omit=dev
+
       - name: Package module
         run: |
           mkdir -p pkg/companion-module-sermon-helper
-          cp -r dist companion package.json pkg/companion-module-sermon-helper/
+          cp -r dist/ companion/ package.json node_modules/ pkg/companion-module-sermon-helper/
           cd pkg && tar -czf ../companion-module-sermon-helper.tar.gz companion-module-sermon-helper
 
       - name: Create GitHub Release
