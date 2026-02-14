@@ -27,10 +27,13 @@ jobs:
       - name: Verify build output
         run: test -f dist/main.js
 
+      - name: Install production dependencies for packaging
+        run: npm ci --omit=dev
+
       - name: Package module
         run: |
           mkdir -p pkg/companion-module-sermon-helper
-          cp -r dist/ src/ companion/ pkg/companion-module-sermon-helper/
+          cp -r dist/ src/ companion/ node_modules/ pkg/companion-module-sermon-helper/
           cp package.json package-lock.json tsconfig.json tsconfig.build.json README.md pkg/companion-module-sermon-helper/
           cd pkg && tar -czf ../companion-module-sermon-helper.tar.gz companion-module-sermon-helper
 
