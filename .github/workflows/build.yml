@@ -31,5 +31,10 @@ jobs:
           name: companion-module-sermon-helper
           path: |
             dist/
+            src/
             companion/
             package.json
+            package-lock.json
+            tsconfig.json
+            tsconfig.build.json
+            README.md
